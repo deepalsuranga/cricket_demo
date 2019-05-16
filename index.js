@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-app.use(express.json);
+app.use(express.json());
 
 var date = new Date();
 var t_current_hour = date.getHours();
@@ -32,7 +32,7 @@ var b_i_overs = 0;
 
 var b_i_economy_rate = b_i_runs / b_i_overs;
 
-const current_scores = [];
+
 
 const current_score = [
     {
@@ -109,11 +109,25 @@ const current_score = [
     }
 ];
 
+const current_scores = [
+    {
+        id:1,
+        data:current_score
+    }
+];
+
 app.get('/', (req, res) => {
 
     res.send("WELCOME CRICKET APPLICATION");
 
 });
+
+app.get('/api/view_scores', (req, res) => {
+
+    res.send(current_scores);
+
+});
+
 
 // server config
 const port = process.env.PORT || 3000;
